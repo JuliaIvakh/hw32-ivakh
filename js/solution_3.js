@@ -1,18 +1,20 @@
-function createMatrix(rows, cols) {
-  const table = document.createElement("table");
-  table.setAttribute("border", "1");
-  document.body.append(table);
+const resultSize = 10;
 
-  let counter = 0;
-  for (let i = 0; i < rows; i++) {
+function tableCreator(tableDatas, tableRows) {
+  const table = document.createElement("table");
+  let content = 1;
+  for (let j = 1; j <= tableRows; j++) {
     const tr = document.createElement("tr");
-    table.append(tr);
-    for (let j = 1; j <= cols; j++) {
-      ++counter;
+
+    for (let i = 1; i <= tableDatas; i++) {
       const td = document.createElement("td");
-      td.innerHTML = counter;
+      td.textContent = content++;
       tr.append(td);
     }
+    table.append(tr);
   }
+  document.body.append(table);
+  return table;
 }
-console.log(createMatrix(10, 10));
+
+tableCreator(resultSize, resultSize);

@@ -1,21 +1,19 @@
-const arr1 = [1, 2, 3];
-const arr2 = [1, 2, [1.1, 1.2, 1.3], 3];
-
-function generateList(array) {
-  const ul = document.createElement("ul");
-
-  for (let i = 0; i < array.length; i++) {
-    const listItem = document.createElement("li");
-    listItem.append(
-      Array.isArray(array[i])
-        ? generateList(array[i])
-        : document.createTextNode(array[i])
-    );
-    ul.append(listItem);
+function generateList(arr) {
+  const list = document.createElement("ul");
+  for (const item of arr) {
+    if (!Array.isArray(item)) {
+      const li = document.createElement("li");
+      li.textContent = item;
+      list.append(li);
+    } else {
+      const li = document.createElement("li");
+      li.append(generateList(item));
+      list.append(li);
+    }
   }
-
-  document.body.append(ul);
-  return ul;
+  document.body.append(list);
+  return list;
 }
-console.log(generateList(arr1));
-console.log(generateList(arr2));
+
+const resultArray = [1, 2, [1.1, 1.2, 1.3], 3];
+generateList(resultArray);
